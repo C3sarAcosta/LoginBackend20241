@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using LoginBackend20241.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LoginBackend20241.Context
@@ -9,5 +10,7 @@ namespace LoginBackend20241.Context
         {
             
         }
+
+        public DbSet<Ejemplo> Ejemplos { get; set; }
     }
 }

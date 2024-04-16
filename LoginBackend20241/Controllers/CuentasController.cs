@@ -81,5 +81,24 @@ namespace LoginBackend20241.Controllers
 
             return BadRequest(resultado.Errors);
         }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<RespuestaAutenticacion>> Login(CredencialesUsuario credencialesUsuario)
+        {
+            var resultado = await signInManager.PasswordSignInAsync(credencialesUsuario.Email,
+                credencialesUsuario.Password, isPersistent:false, lockoutOnFailure:false);
+            if (resultado.Succeeded)
+            {
+                return await ConstruirToken(credencialesUsuario);
+            }
+            else
+            {
+                var error = new MensajeError()
+                {
+                    Error = "Login incorrecto"
+                };
+                return BadRequest(error);
+            }
+        }
     }
 }
